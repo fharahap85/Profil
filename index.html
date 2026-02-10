@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah Fikri Harahap | Fullstack Developer</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif']
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        dark: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'gradient-x': 'gradient-x 15s ease infinite alternate',
+                        'fade-in': 'fade-in 0.6s ease-out forwards'
+                    },
+                    keyframes: {
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        'gradient-x': {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '100%': { backgroundPosition: '100% 50%' }
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            background-attachment: fixed;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .glass-hover:hover {
+            background: rgba(56, 189, 248, 0.1);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        /* Gradient border */
+        .gradient-border {
+            position: relative;
+            border-radius: 16px;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(45deg, #0ea5e9, #38bdf8, #7dd3fc, #38bdf8, #0ea5e9);
+            border-radius: 16px;
+            z-index: -1;
+            animation: gradient-x 10s ease infinite;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #0ea5e9, #38bdf8);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #0284c7, #0369a1);
+        }
+
+        /* Cursor effect */
+        .cursor-dot {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #0ea5e9;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-outline {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid rgba(14, 165, 233, 0.5);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 9998;
+            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .cursor-dot,
+            .cursor-outline {
+                display: block;
+            }
+        }
+
+        /* Section divider wave */
+        .wave-divider {
+            position: relative;
+            height: 100px;
+            margin-top: -50px;
+            z-index: 10;
+        }
+
+        .wave-divider svg {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Skill progress bars */
+        .skill-bar {
+            position: relative;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+            border-radius: 4px;
+            transform-origin: left;
+            transform: scaleX(0);
+            transition: transform 1s ease-out;
+        }
+
+        .skill-bar.visible .skill-progress {
+            transform: scaleX(1);
+        }
+
+        /* Project card tilt effect */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) rotateX(5deg) rotateY(-5deg);
+            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.3);
+        }
+
+        /* Email copy effect */
+        .email-copy {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .email-copy::after {
+            content: 'Copied!';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: #10b981;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .email-copy.copied::after {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-2xl font-heading font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+                AFH
+            </div>
+            <div class="hidden md:flex space-x-12">
+                <a href="#about" class="text-sm font-medium hover:text-primary-400 transition-colors">About</a>
+                <a href="#skills" class="text-sm font-medium hover:text-primary-400 transition-colors">Skills</a>
+                <a href="#experience" class="text-sm font-medium hover:text-primary-400 transition-colors">Experience</a>
+                <a href="#projects" class="text-sm font-medium hover:text-primary-400 transition-colors">Projects</a>
+                <a href="#contact" class="text-sm font-medium hover:text-primary-400 transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden text-xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center px-6 pt-32 pb-20 relative overflow-hidden">
+        <!-- Background gradient orbs -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-48 -right-48 w-96 h-96 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+            <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute top-1/2 -right-16 w-64 h-64 bg-primary-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div class="max-w-5xl mx-auto text-center relative z-10" data-aos="fade-up">
+            <div class="inline-block mb-6">
+                <div class="relative">
+                    <!-- Foto Profil Anda -->
+			<div class="relative inline-block">
+			    <img src="profil.png" alt="Abdullah Fikri Harahap" class="w-32 h-32 rounded-full object-cover shadow-lg animate-float border-2 border-primary-500/30">
+			    <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-green-500 border-4 border-dark-900 flex items-center justify-center">
+			        <i class="fas fa-check text-xs text-white"></i>
+			    </div>
+			</div>
+                    <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-green-500 border-4 border-dark-900 flex items-center justify-center">
+                        <i class="fas fa-check text-xs text-white"></i>
+                    </div>
+                </div>
+            </div>
+
+            <h1 class="text-5xl md:text-7xl font-heading font-bold mb-6 bg-gradient-to-r from-white to-primary-300 bg-clip-text text-transparent leading-tight">
+                Abdullah Fikri Harahap
+            </h1>
+
+            <div class="text-xl md:text-2xl font-medium mb-8 text-primary-300">
+                <span class="typing-text"></span>
+                <span class="cursor-blink">|</span>
+            </div>
+
+            <p class="text-lg text-dark-300 mb-12 max-w-2xl mx-auto">
+                Fullstack Developer specializing in Laravel, Vue.js & React. Building robust B2B SaaS solutions for POS, HRIS, inventory, and finance systems.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="gradient-border glass px-8 py-4 rounded-lg font-medium hover:shadow-lg hover:shadow-primary-500/30 transition-all">
+                    Get in Touch
+                </a>
+                <a href="#projects" class="glass px-8 py-4 rounded-lg font-medium border border-primary-500/30 hover:bg-primary-500/10 transition-all">
+                    View Projects
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#about" class="text-primary-400 hover:text-primary-300">
+                <i class="fas fa-chevron-down text-2xl"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Wave divider -->
+    <div class="wave-divider">
+        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 50C240 33.3333 480 66.6667 720 66.6667C960 66.6667 1200 33.3333 1440 50V100H0V50Z" fill="url(#gradientWave)"/>
+            <defs>
+                <linearGradient id="gradientWave" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#0f172a" />
+                    <stop offset="100%" stop-color="#1e293b" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 bg-dark-900 relative">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-heading font-bold mb-4">About Me</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-heading font-semibold mb-4 text-primary-400">Who I Am</h3>
+                    <p class="text-dark-300 mb-6 leading-relaxed">
+                        I'm a passionate Fullstack Developer with 2+ years of experience building production-ready B2B SaaS applications. I specialize in creating robust, scalable systems using Laravel, Vue.js, and React that solve real business problems.
+                    </p>
+                    <p class="text-dark-300 mb-6 leading-relaxed">
+                        My journey in web development started with a fascination for how technology can streamline business operations. Today, I focus on delivering clean, efficient code that powers everything from POS systems to HRIS and inventory management platforms.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mt-6">
+                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium">📍 Pekanbaru, Indonesia</span>
+                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium">💼 2+ Years Experience</span>
+                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium">⚡ Fullstack Developer</span>
+                    </div>
+                </div>
+
+                <div data-aos="fade-left">
+                    <div class="glass p-8 rounded-2xl">
+                        <h4 class="text-xl font-heading font-semibold mb-6 text-primary-400">What I Do</h4>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
+                                <span>Build enterprise-grade Laravel applications</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
+                                <span>Develop modern SPAs with Vue.js & React</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
+                                <span>Design RESTful APIs & integrate third-party services</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
+                                <span>Optimize database performance & query efficiency</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
+                                <span>Refactor legacy code into modern, maintainable systems</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 bg-dark-800/50">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-heading font-bold mb-4">My Skills</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Backend Skills -->
+                <div data-aos="fade-right">
+                    <h3 class="text-2xl font-heading font-semibold mb-6 text-primary-400 flex items-center">
+                        <i class="fas fa-server mr-3"></i>
+                        Backend Development
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">PHP 8 / Laravel</span>
+                                <span class="text-primary-400 font-medium">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[95%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">MySQL / PostgreSQL</span>
+                                <span class="text-primary-400 font-medium">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[90%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">RESTful APIs</span>
+                                <span class="text-primary-400 font-medium">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[85%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Redis / Queues</span>
+                                <span class="text-primary-400 font-medium">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[80%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Frontend Skills -->
+                <div data-aos="fade-left">
+                    <h3 class="text-2xl font-heading font-semibold mb-6 text-primary-400 flex items-center">
+                        <i class="fas fa-laptop-code mr-3"></i>
+                        Frontend Development
+                    </h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Vue.js / Nuxt.js</span>
+                                <span class="text-primary-400 font-medium">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[85%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">React / Next.js</span>
+                                <span class="text-primary-400 font-medium">80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[80%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Inertia.js</span>
+                                <span class="text-primary-400 font-medium">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[85%]"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">HTML5 / CSS3 / Tailwind</span>
+                                <span class="text-primary-400 font-medium">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress w-[90%]"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools & Technologies -->
+            <div class="mt-16" data-aos="fade-up">
+                <h3 class="text-2xl font-heading font-semibold mb-6 text-center text-primary-400">Tools & Technologies</h3>
+                <div class="flex flex-wrap justify-center gap-6">
+                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
+                        <i class="fab fa-git-alt text-3xl mb-2 text-primary-400"></i>
+                        <div class="text-sm">Git / GitHub</div>
+                    </div>
+                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
+                        <i class="fas fa-docker text-3xl mb-2 text-primary-400"></i>
+                        <div class="text-sm">Docker</div>
+                    </div>
+                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
+                        <i class="fas fa-database text-3xl mb-2 text-primary-400"></i>
+                        <div class="text-sm">SQL Server</div>
+                    </div>
+                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
+                        <i class="fas fa-robot text-3xl mb-2 text-primary-400"></i>
+                        <div class="text-sm">AI Tools</div>
+                    </div>
+                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
+                        <i class="fas fa-tachometer-alt text-3xl mb-2 text-primary-400"></i>
+                        <div class="text-sm">Linux</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 px-6 bg-dark-900">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-heading font-bold mb-4">Work Experience</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="space-y-8">
+                <!-- Experience 1 -->
+                <div class="glass p-8 rounded-2xl" data-aos="fade-up">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-heading font-semibold text-primary-400">Fullstack Developer</h3>
+                            <p class="text-dark-300 mt-1">B2B SaaS Applications</p>
+                        </div>
+                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium mt-3 md:mt-0">2022 - Present</span>
+                    </div>
+                    <p class="text-dark-300 mb-6">
+                        Building and maintaining production-ready B2B SaaS applications including POS, HRIS, inventory management, and finance systems using Laravel, Vue.js, and React.
+                    </p>
+                    <ul class="space-y-3 text-dark-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
+                            <span>Developed full-stack applications with Laravel 10/11 and Vue.js/React</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
+                            <span>Integrated third-party APIs including Fazpass (WhatsApp/SMS OTP) and payment gateways</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
+                            <span>Optimized database queries and implemented Redis for queue management</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
+                            <span>Refactored legacy monolithic code into modular, maintainable architecture</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="glass p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                        <div>
+                            <h3 class="text-2xl font-heading font-semibold text-primary-400">Laravel Specialist</h3>
+                            <p class="text-dark-300 mt-1">Enterprise Systems</p>
+                        </div>
+                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium mt-3 md:mt-0">2021 - 2022</span>
+                    </div>
+                    <p class="text-dark-300 mb-6">
+                        Focused on backend development using Laravel ecosystem, building robust APIs and database-driven applications for enterprise clients.
+                    </p>
+                    <ul class="space-y-3 text-dark-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
+                            <span>Built RESTful APIs for internal and external integrations</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
+                            <span>Implemented authentication systems (JWT, OAuth) and role-based access control</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
+                            <span>Worked with MySQL and PostgreSQL for complex data modeling</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
+                            <span>Collaborated with frontend teams to deliver seamless user experiences</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6 bg-dark-800/50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-heading font-bold mb-4">Featured Projects</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card glass p-8 rounded-2xl" data-aos="fade-up">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-3">
+                            <i class="fas fa-shopping-cart text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-heading font-semibold">myRotte.id</h3>
+                    </div>
+                    <p class="text-dark-300 mb-6">
+                        A comprehensive POS and inventory management system built with Laravel and Vue.js for retail businesses.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="glass px-3 py-1 rounded text-xs">Laravel 11</span>
+                        <span class="glass px-3 py-1 rounded text-xs">Vue.js</span>
+                        <span class="glass px-3 py-1 rounded text-xs">MySQL</span>
+                        <span class="glass px-3 py-1 rounded text-xs">REST API</span>
+                        <span class="glass px-3 py-1 rounded text-xs">Inertia.js</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-primary-400 font-medium">Production System</span>
+                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-3">
+                            <i class="fas fa-building text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-heading font-semibold">Simbada</h3>
+                    </div>
+                    <p class="text-dark-300 mb-6">
+                        HRIS and asset management platform for enterprise clients, featuring employee tracking, attendance, and resource allocation.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="glass px-3 py-1 rounded text-xs">Laravel 10</span>
+                        <span class="glass px-3 py-1 rounded text-xs">React</span>
+                        <span class="glass px-3 py-1 rounded text-xs">PostgreSQL</span>
+                        <span class="glass px-3 py-1 rounded text-xs">JWT Auth</span>
+                        <span class="glass px-3 py-1 rounded text-xs">Redis</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-primary-400 font-medium">Enterprise Solution</span>
+                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-3">
+                            <i class="fas fa-file-invoice-dollar text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-heading font-semibold">Finance System</h3>
+                    </div>
+                    <p class="text-dark-300 mb-6">
+                        Financial calculation and reporting engine with data visualization using Chart.js and Laravel Collections.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="glass px-3 py-1 rounded text-xs">Laravel</span>
+                        <span class="glass px-3 py-1 rounded text-xs">Vue.js</span>
+                        <span class="glass px-3 py-1 rounded text-xs">Chart.js</span>
+                        <span class="glass px-3 py-1 rounded text-xs">Laravel Collections</span>
+                        <span class="glass px-3 py-1 rounded text-xs">API Integration</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-primary-400 font-medium">Financial Platform</span>
+                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card glass p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-3">
+                            <i class="fas fa-mobile-alt text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-heading font-semibold">Fazpass Integration</h3>
+                    </div>
+                    <p class="text-dark-300 mb-6">
+                        WhatsApp/SMS OTP authentication system integration for user verification and security enhancement.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="glass px-3 py-1 rounded text-xs">Fazpass API</span>
+                        <span class="glass px-3 py-1 rounded text-xs">WhatsApp API</span>
+                        <span class="glass px-3 py-1 rounded text-xs">Webhooks</span>
+                        <span class="glass px-3 py-1 rounded text-xs">Laravel</span>
+                        <span class="glass px-3 py-1 rounded text-xs">Security</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-primary-400 font-medium">Telecom Integration</span>
+                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-dark-900">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-heading font-bold mb-4">Get In Touch</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
+                <p class="text-dark-300 mt-4 max-w-2xl mx-auto">
+                    I'm always open to discussing new projects, creative ideas, or opportunities to collaborate.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div data-aos="fade-right">
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-envelope text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-semibold mb-1">Email</h4>
+                                <a href="mailto:fharahap85@gmail.com" class="email-copy text-dark-300 hover:text-primary-400 transition-colors break-words">
+                                    fharahap85@gmail.com
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-map-marker-alt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-semibold mb-1">Location</h4>
+                                <p class="text-dark-300">Pekanbaru, Riau, Indonesia</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fab fa-linkedin-in text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-semibold mb-1">LinkedIn</h4>
+                                <a href="https://www.linkedin.com/in/abdullah-fikri-harahap-916704110/" target="_blank" class="text-dark-300 hover:text-primary-400 transition-colors break-words">
+                                    linkedin.com/in/abdullah-fikri-harahap
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fab fa-github text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-heading font-semibold mb-1">GitHub</h4>
+                                <a href="#" target="_blank" class="text-dark-300 hover:text-primary-400 transition-colors break-words">
+                                    github.com/yourusername
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div data-aos="fade-left">
+                    <div class="glass p-8 rounded-2xl">
+                        <form id="contactForm">
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium mb-2">Name</label>
+                                <input type="text" class="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:outline-none focus:border-primary-500 transition-colors" placeholder="Your name">
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium mb-2">Email</label>
+                                <input type="email" class="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:outline-none focus:border-primary-500 transition-colors" placeholder="your@email.com">
+                            </div>
+                            <div class="mb-6">
+                                <label class="block text-sm font-medium mb-2">Message</label>
+                                <textarea class="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:outline-none focus:border-primary-500 transition-colors resize-none" rows="4" placeholder="Your message..."></textarea>
+                            </div>
+                            <button type="submit" class="gradient-border glass w-full px-6 py-4 rounded-lg font-medium hover:shadow-lg hover:shadow-primary-500/30 transition-all">
+                                Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-dark-900/90 border-t border-dark-700">
+        <div class="max-w-5xl mx-auto text-center">
+            <div class="text-2xl font-heading font-bold mb-4 bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
+                AFH
+            </div>
+            <p class="text-dark-400 mb-6">
+                Fullstack Developer | Laravel Specialist | Building Scalable B2B SaaS Solutions
+            </p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="text-dark-400 hover:text-primary-400 transition-colors">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/abdullah-fikri-harahap-916704110/" target="_blank" class="text-dark-400 hover:text-primary-400 transition-colors">
+                    <i class="fab fa-linkedin-in text-2xl"></i>
+                </a>
+                <a href="mailto:fharahap85@gmail.com" class="text-dark-400 hover:text-primary-400 transition-colors">
+                    <i class="fas fa-envelope text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-dark-500 text-sm">
+                © 2026 Abdullah Fikri Harahap. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- AOS Animation Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Typing effect
+        const typingText = document.querySelector('.typing-text');
+        const phrases = [
+            'Fullstack Developer',
+            'Laravel Specialist',
+            'B2B SaaS Builder',
+            'API Integrator',
+            'Code Refactorer'
+        ];
+        
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let isPaused = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+                
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    setTimeout(type, 500);
+                    return;
+                }
+            } else {
+                typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+                
+                if (charIndex === currentPhrase.length) {
+                    isDeleting = true;
+                    setTimeout(type, 2000);
+                    return;
+                }
+            }
+            
+            setTimeout(type, isDeleting ? 50 : 100);
+        }
+
+        // Start typing effect
+        setTimeout(type, 1000);
+
+        // Cursor blink animation
+        setInterval(() => {
+            const cursor = document.querySelector('.cursor-blink');
+            cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+        }, 500);
+
+        // Custom cursor
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+
+        if (cursorDot && cursorOutline) {
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                
+                cursorOutline.style.left = `${posX}px`;
+                cursorOutline.style.top = `${posY}px`;
+            });
+
+            // Links interaction
+            const links = document.querySelectorAll('a, button, .glass-hover');
+            links.forEach(link => {
+                link.addEventListener('mouseover', () => {
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(2)';
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    cursorOutline.style.width = '30px';
+                    cursorOutline.style.height = '30px';
+                });
+                
+                link.addEventListener('mouseout', () => {
+                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
+                    cursorOutline.style.width = '40px';
+                    cursorOutline.style.height = '40px';
+                });
+            });
+        }
+
+        // Email copy functionality
+        const emailLink = document.querySelector('.email-copy');
+        if (emailLink) {
+            emailLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                navigator.clipboard.writeText('fharahap85@gmail.com').then(() => {
+                    emailLink.classList.add('copied');
+                    setTimeout(() => {
+                        emailLink.classList.remove('copied');
+                    }, 2000);
+                });
+            });
+        }
+
+        // Contact form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for your message! I will get back to you soon.');
+                contactForm.reset();
+            });
+        }
+
+        // Skill bars animation on scroll
+        const skillBars = document.querySelectorAll('.skill-bar');
+        
+        function checkSkillBars() {
+            skillBars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    bar.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkSkillBars);
+        checkSkillBars(); // Initial check
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
