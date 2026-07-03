@@ -1,74 +1,27 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abdullah Fikri Harahap | Fullstack Developer</title>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Tailwind CSS via CDN -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- AOS Animation -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
-                        heading: ['Space Grotesk', 'sans-serif']
-                    },
-                    colors: {
-                        primary: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            800: '#075985',
-                            900: '#0c4a6e',
-                        },
-                        dark: {
-                            50: '#f8fafc',
-                            100: '#f1f5f9',
-                            200: '#e2e8f0',
-                            300: '#cbd5e1',
-                            400: '#94a3b8',
-                            500: '#64748b',
-                            600: '#475569',
-                            700: '#334155',
-                            800: '#1e293b',
-                            900: '#0f172a',
-                        }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'gradient-x': 'gradient-x 15s ease infinite alternate',
-                        'fade-in': 'fade-in 0.6s ease-out forwards'
-                    },
-                    keyframes: {
-                        'float': {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' }
-                        },
-                        'gradient-x': {
-                            '0%': { backgroundPosition: '0% 50%' },
-                            '100%': { backgroundPosition: '100% 50%' }
-                        },
-                        'fade-in': {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        }
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
@@ -76,901 +29,777 @@
     </script>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+        .dark ::-webkit-scrollbar-thumb { background: #475569; }
+
+        .sidebar-link.active {
+            color: #14b8a6;
+            background: rgba(20, 184, 166, 0.08);
         }
 
-        body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            background-attachment: fixed;
-            color: #e2e8f0;
-            overflow-x: hidden;
-        }
-
-        /* Glassmorphism effect */
-        .glass {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        .glass-hover:hover {
-            background: rgba(56, 189, 248, 0.1);
-            transform: translateY(-2px);
-            transition: all 0.3s ease;
-        }
-
-        /* Gradient border */
-        .gradient-border {
+        .btn-glow {
             position: relative;
-            border-radius: 16px;
+            z-index: 1;
         }
-
-        .gradient-border::before {
+        .btn-glow::before {
             content: '';
             position: absolute;
-            inset: -2px;
-            background: linear-gradient(45deg, #0ea5e9, #38bdf8, #7dd3fc, #38bdf8, #0ea5e9);
-            border-radius: 16px;
-            z-index: -1;
-            animation: gradient-x 10s ease infinite;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(30, 41, 59, 0.5);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #0ea5e9, #38bdf8);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, #0284c7, #0369a1);
-        }
-
-        /* Cursor effect */
-        .cursor-dot {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #0ea5e9;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9999;
-            transition: transform 0.1s ease;
-        }
-
-        .cursor-outline {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid rgba(14, 165, 233, 0.5);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9998;
-            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-            .cursor-dot,
-            .cursor-outline {
-                display: block;
-            }
-        }
-
-        /* Section divider wave */
-        .wave-divider {
-            position: relative;
-            height: 100px;
-            margin-top: -50px;
-            z-index: 10;
-        }
-
-        .wave-divider svg {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Skill progress bars */
-        .skill-bar {
-            position: relative;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background: linear-gradient(90deg, #0ea5e9, #38bdf8);
-            border-radius: 4px;
-            transform-origin: left;
-            transform: scaleX(0);
-            transition: transform 1s ease-out;
-        }
-
-        .skill-bar.visible .skill-progress {
-            transform: scaleX(1);
-        }
-
-        /* Project card tilt effect */
-        .project-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px) rotateX(5deg) rotateY(-5deg);
-            box-shadow: 0 20px 60px rgba(14, 165, 233, 0.3);
-        }
-
-        /* Email copy effect */
-        .email-copy {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .email-copy::after {
-            content: 'Copied!';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            color: #10b981;
-            font-weight: 600;
+            inset: -1px;
+            border-radius: inherit;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s;
+            z-index: -1;
+            background: radial-gradient(circle at center, rgba(20,184,166,0.4) 0%, transparent 70%);
+            filter: blur(12px);
+        }
+        .btn-glow:hover::before {
+            opacity: 1;
         }
 
-        .email-copy.copied::after {
-            transform: translate(-50%, -50%) scale(1);
+        .skill-badge {
+            transition: all 0.2s;
+        }
+        .skill-badge:hover {
+            border-color: rgba(20, 184, 166, 0.5);
+            background: rgba(20, 184, 166, 0.08);
+        }
+
+        .project-card {
+            transition: all 0.3s;
+        }
+        .project-card:hover {
+            border-color: rgba(20, 184, 166, 0.5);
+            box-shadow: 0 0 30px rgba(20, 184, 166, 0.1);
+        }
+        .project-card .overlay {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .project-card:hover .overlay {
             opacity: 1;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #334155;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
-<body>
-    <!-- Custom cursor -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="text-2xl font-heading font-bold bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                AFH
+<body class="bg-slate-50 dark:bg-[#0f172a] text-slate-600 dark:text-slate-400 font-sans transition-colors duration-300">
+
+    <!-- SIDEBAR (desktop) -->
+    <aside id="sidebar" class="hidden lg:flex fixed left-0 top-0 h-screen w-72 flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] z-30 transition-colors duration-300">
+        <div class="p-8 flex flex-col flex-1">
+            <a href="#hero">
+                <h1 class="text-lg font-bold text-slate-900 dark:text-white leading-tight">Abdullah Fikri<br>Harahap</h1>
+                <p class="font-mono text-xs text-teal-500 dark:text-teal-400 mt-1">Fullstack Developer</p>
+            </a>
+
+            <nav class="mt-12 flex-1 space-y-1">
+                <a href="#about" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                    <span class="font-mono text-xs text-teal-500/70 dark:text-teal-400/70 w-5">01</span>
+                    <span>About</span>
+                </a>
+                <a href="#skills" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                    <span class="font-mono text-xs text-teal-500/70 dark:text-teal-400/70 w-5">02</span>
+                    <span>Skills</span>
+                </a>
+                <a href="#experience" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                    <span class="font-mono text-xs text-teal-500/70 dark:text-teal-400/70 w-5">03</span>
+                    <span>Experience</span>
+                </a>
+                <a href="#projects" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                    <span class="font-mono text-xs text-teal-500/70 dark:text-teal-400/70 w-5">04</span>
+                    <span>Projects</span>
+                </a>
+                <a href="#contact" class="sidebar-link flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                    <span class="font-mono text-xs text-teal-500/70 dark:text-teal-400/70 w-5">05</span>
+                    <span>Contact</span>
+                </a>
+            </nav>
+
+            <div class="pt-6 border-t border-slate-200 dark:border-slate-800 space-y-4">
+                <div class="flex gap-3">
+                    <a href="https://github.com/fharahap85" target="_blank" aria-label="GitHub" class="p-2 rounded-lg text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/abdullah-fikri-harahap-916704110/" target="_blank" aria-label="LinkedIn" class="p-2 rounded-lg text-slate-400 dark:text-slate-500 hover:text-[#0077b5] dark:hover:text-[#0077b5] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="mailto:fharahap85@gmail.com" aria-label="Email" class="p-2 rounded-lg text-slate-400 dark:text-slate-500 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </a>
+                </div>
+                <button id="theme-toggle" class="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all w-full">
+                    <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                    <span>theme</span>
+                </button>
             </div>
-            <div class="hidden md:flex space-x-12">
-                <a href="#about" class="text-sm font-medium hover:text-primary-400 transition-colors">About</a>
-                <a href="#skills" class="text-sm font-medium hover:text-primary-400 transition-colors">Skills</a>
-                <a href="#experience" class="text-sm font-medium hover:text-primary-400 transition-colors">Experience</a>
-                <a href="#projects" class="text-sm font-medium hover:text-primary-400 transition-colors">Projects</a>
-                <a href="#contact" class="text-sm font-medium hover:text-primary-400 transition-colors">Contact</a>
+        </div>
+    </aside>
+
+    <!-- MOBILE NAV -->
+    <nav class="lg:hidden fixed top-0 inset-x-0 z-40 bg-white/80 dark:bg-[#0f172a]/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-6 py-4 transition-colors duration-300">
+        <div class="flex justify-between items-center">
+            <a href="#hero" class="text-lg font-bold text-slate-900 dark:text-white">AFH</a>
+            <div class="flex items-center gap-2">
+                <button id="theme-toggle-mobile" aria-label="Toggle theme" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                </button>
+                <button id="menu-toggle" aria-label="Open menu" class="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
             </div>
-            <button class="md:hidden text-xl">
-                <i class="fas fa-bars"></i>
-            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen flex items-center justify-center px-6 pt-32 pb-20 relative overflow-hidden">
-        <!-- Background gradient orbs -->
-        <div class="absolute inset-0 overflow-hidden">
-            <div class="absolute -top-48 -right-48 w-96 h-96 bg-primary-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-            <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-primary-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-            <div class="absolute top-1/2 -right-16 w-64 h-64 bg-primary-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
-        </div>
-
-        <div class="max-w-5xl mx-auto text-center relative z-10" data-aos="fade-up">
-            <div class="inline-block mb-6">
-                <div class="relative">
-                    <!-- Foto Profil Anda -->
-			<div class="relative inline-block">
-			    <img src="profil.png" alt="Abdullah Fikri Harahap" class="w-32 h-32 rounded-full object-cover shadow-lg animate-float border-2 border-primary-500/30">
-			    <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-green-500 border-4 border-dark-900 flex items-center justify-center">
-			        <i class="fas fa-check text-xs text-white"></i>
-			    </div>
-			</div>
-                    <div class="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-green-500 border-4 border-dark-900 flex items-center justify-center">
-                        <i class="fas fa-check text-xs text-white"></i>
-                    </div>
-                </div>
-            </div>
-
-            <h1 class="text-5xl md:text-7xl font-heading font-bold mb-6 bg-gradient-to-r from-white to-primary-300 bg-clip-text text-transparent leading-tight">
-                Abdullah Fikri Harahap
-            </h1>
-
-            <div class="text-xl md:text-2xl font-medium mb-8 text-primary-300">
-                <span class="typing-text"></span>
-                <span class="cursor-blink">|</span>
-            </div>
-
-            <p class="text-lg text-dark-300 mb-12 max-w-2xl mx-auto">
-                Fullstack Developer specializing in Laravel, Vue.js & React. Building robust B2B SaaS solutions for POS, HRIS, inventory, and finance systems.
-            </p>
-
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#contact" class="gradient-border glass px-8 py-4 rounded-lg font-medium hover:shadow-lg hover:shadow-primary-500/30 transition-all">
-                    Get in Touch
-                </a>
-                <a href="#projects" class="glass px-8 py-4 rounded-lg font-medium border border-primary-500/30 hover:bg-primary-500/10 transition-all">
-                    View Projects
-                </a>
-            </div>
-        </div>
-
-        <!-- Scroll indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <a href="#about" class="text-primary-400 hover:text-primary-300">
-                <i class="fas fa-chevron-down text-2xl"></i>
+    <!-- MOBILE MENU -->
+    <div id="mobile-menu" class="lg:hidden fixed inset-0 z-50 bg-white dark:bg-[#0f172a] pt-20 px-8 transform translate-x-full transition-transform duration-300 overflow-y-auto">
+        <button id="menu-close" aria-label="Close menu" class="absolute top-4 right-6 p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+        <nav class="space-y-1 mt-4">
+            <a href="#about" class="mobile-link flex items-center gap-4 px-4 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                <span class="font-mono text-sm text-teal-500/70 dark:text-teal-400/70">01</span>
+                <span>About</span>
+            </a>
+            <a href="#skills" class="mobile-link flex items-center gap-4 px-4 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                <span class="font-mono text-sm text-teal-500/70 dark:text-teal-400/70">02</span>
+                <span>Skills</span>
+            </a>
+            <a href="#experience" class="mobile-link flex items-center gap-4 px-4 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                <span class="font-mono text-sm text-teal-500/70 dark:text-teal-400/70">03</span>
+                <span>Experience</span>
+            </a>
+            <a href="#projects" class="mobile-link flex items-center gap-4 px-4 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                <span class="font-mono text-sm text-teal-500/70 dark:text-teal-400/70">04</span>
+                <span>Projects</span>
+            </a>
+            <a href="#contact" class="mobile-link flex items-center gap-4 px-4 py-3 rounded-lg text-base font-medium text-slate-600 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all">
+                <span class="font-mono text-sm text-teal-500/70 dark:text-teal-400/70">05</span>
+                <span>Contact</span>
+            </a>
+        </nav>
+        <div class="mt-8 flex gap-3">
+            <a href="https://github.com/fharahap85" target="_blank" aria-label="GitHub" class="p-2.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                <i data-lucide="github" class="w-5 h-5"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/abdullah-fikri-harahap-916704110/" target="_blank" aria-label="LinkedIn" class="p-2.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-[#0077b5] dark:hover:text-[#0077b5] hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                <i data-lucide="linkedin" class="w-5 h-5"></i>
+            </a>
+            <a href="mailto:fharahap85@gmail.com" aria-label="Email" class="p-2.5 rounded-lg text-slate-400 dark:text-slate-500 hover:text-teal-500 dark:hover:text-teal-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
+                <i data-lucide="mail" class="w-5 h-5"></i>
             </a>
         </div>
-    </section>
-
-    <!-- Wave divider -->
-    <div class="wave-divider">
-        <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 50C240 33.3333 480 66.6667 720 66.6667C960 66.6667 1200 33.3333 1440 50V100H0V50Z" fill="url(#gradientWave)"/>
-            <defs>
-                <linearGradient id="gradientWave" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stop-color="#0f172a" />
-                    <stop offset="100%" stop-color="#1e293b" />
-                </linearGradient>
-            </defs>
-        </svg>
     </div>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 px-6 bg-dark-900 relative">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl font-heading font-bold mb-4">About Me</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
+    <!-- MAIN CONTENT -->
+    <main class="lg:ml-72 min-h-screen transition-colors duration-300">
+
+        <!-- HERO -->
+        <section id="hero" class="min-h-screen flex items-center justify-center px-6 lg:px-12 relative">
+            <div class="absolute inset-0 overflow-hidden pointer-events-none">
+                <div class="absolute -top-48 -right-48 w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-[0.07]"></div>
+                <div class="absolute -bottom-24 -left-24 w-80 h-80 bg-teal-400 rounded-full mix-blend-multiply filter blur-3xl opacity-[0.07]"></div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div data-aos="fade-right">
-                    <h3 class="text-2xl font-heading font-semibold mb-4 text-primary-400">Who I Am</h3>
-                    <p class="text-dark-300 mb-6 leading-relaxed">
-                        I'm a passionate Fullstack Developer with 2+ years of experience building production-ready B2B SaaS applications. I specialize in creating robust, scalable systems using Laravel, Vue.js, and React that solve real business problems.
-                    </p>
-                    <p class="text-dark-300 mb-6 leading-relaxed">
-                        My journey in web development started with a fascination for how technology can streamline business operations. Today, I focus on delivering clean, efficient code that powers everything from POS systems to HRIS and inventory management platforms.
-                    </p>
-                    <div class="flex flex-wrap gap-3 mt-6">
-                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium">📍 Pekanbaru, Indonesia</span>
-                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium">💼 2+ Years Experience</span>
-                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium">⚡ Fullstack Developer</span>
-                    </div>
+            <div class="max-w-3xl text-center relative z-10" data-aos="fade-up">
+                <div class="mb-8">
+                    <img src="profil.png" alt="Abdullah Fikri Harahap" class="w-28 h-28 rounded-full object-cover shadow-lg mx-auto border-2 border-teal-500/30 dark:border-teal-400/30">
                 </div>
 
-                <div data-aos="fade-left">
-                    <div class="glass p-8 rounded-2xl">
-                        <h4 class="text-xl font-heading font-semibold mb-6 text-primary-400">What I Do</h4>
-                        <ul class="space-y-4">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
-                                <span>Build enterprise-grade Laravel applications</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
-                                <span>Develop modern SPAs with Vue.js & React</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
-                                <span>Design RESTful APIs & integrate third-party services</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
-                                <span>Optimize database performance & query efficiency</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-primary-500 mt-1 mr-3"></i>
-                                <span>Refactor legacy code into modern, maintainable systems</span>
-                            </li>
-                        </ul>
-                    </div>
+                <p class="font-mono text-sm text-teal-500 dark:text-teal-400 mb-4">Hi, my name is</p>
+
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+                    Abdullah Fikri Harahap.
+                </h1>
+
+                <div class="text-lg sm:text-xl font-medium mb-6 text-slate-700 dark:text-slate-300">
+                    <span class="typing-text"></span><span class="cursor-blink">|</span>
+                </div>
+
+                <p class="text-base text-slate-500 dark:text-slate-400 mb-6 max-w-xl mx-auto leading-relaxed">
+                    Fullstack Developer specializing in Laravel, Vue.js & React. Building robust B2B SaaS solutions for POS, HRIS, inventory, and finance systems.
+                </p>
+
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/5 text-sm text-green-400 mb-10">
+                    <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                    Open to remote opportunities
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#contact" class="btn-glow inline-flex items-center justify-center px-8 py-3.5 rounded-lg font-medium bg-teal-500 hover:bg-teal-400 text-white dark:text-slate-900 transition-all hover:shadow-lg hover:shadow-teal-500/25">
+                        Get in Touch
+                    </a>
+                    <a href="#projects" class="btn-glow inline-flex items-center justify-center px-8 py-3.5 rounded-lg font-medium border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-teal-500 dark:hover:border-teal-400 hover:text-teal-500 dark:hover:text-teal-400 transition-all">
+                        View Projects
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 px-6 bg-dark-800/50">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl font-heading font-bold mb-4">My Skills</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
-            </div>
+            <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-slate-400 dark:text-slate-500 hover:text-teal-500 dark:hover:text-teal-400 transition-colors" aria-label="Scroll down">
+                <i data-lucide="chevron-down" class="w-6 h-6 animate-bounce"></i>
+            </a>
+        </section>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Backend Skills -->
-                <div data-aos="fade-right">
-                    <h3 class="text-2xl font-heading font-semibold mb-6 text-primary-400 flex items-center">
-                        <i class="fas fa-server mr-3"></i>
-                        Backend Development
-                    </h3>
-                    
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">PHP 8 / Laravel</span>
-                                <span class="text-primary-400 font-medium">95%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[95%]"></div>
-                            </div>
-                        </div>
+        <!-- ABOUT -->
+        <section id="about" class="py-24 px-6 lg:px-12">
+            <div class="max-w-4xl mx-auto">
+                <p class="font-mono text-sm text-teal-500 dark:text-teal-400 mb-2" data-aos="fade-up">01.</p>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12" data-aos="fade-up">About</h2>
 
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">MySQL / PostgreSQL</span>
-                                <span class="text-primary-400 font-medium">90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[90%]"></div>
-                            </div>
-                        </div>
+                <div class="grid md:grid-cols-5 gap-12">
+                    <div class="md:col-span-3 space-y-5" data-aos="fade-right">
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            I'm a passionate Fullstack Developer with 2+ years of experience building production-ready B2B SaaS applications. I specialize in creating robust, scalable systems using Laravel, Vue.js, and React that solve real business problems.
+                        </p>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            My journey in web development started with a fascination for how technology can streamline business operations. Today, I focus on delivering clean, efficient code that powers everything from POS systems to HRIS and inventory management platforms.
+                        </p>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                            I'm currently pursuing my studies at Universitas Islam Riau while actively building independent projects under AFH Projects — a personal brand for developing SaaS products and developer tools outside of my full-time work.
+                        </p>
 
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">RESTful APIs</span>
-                                <span class="text-primary-400 font-medium">85%</span>
+                        <div class="grid grid-cols-3 gap-3 pt-2">
+                            <div class="flex flex-col items-center gap-2 px-3 py-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-center">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
+                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400">Pekanbaru</span>
                             </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[85%]"></div>
+                            <div class="flex flex-col items-center gap-2 px-3 py-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-center">
+                                <i data-lucide="briefcase" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
+                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400">2+ Years</span>
                             </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Redis / Queues</span>
-                                <span class="text-primary-400 font-medium">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[80%]"></div>
+                            <div class="flex flex-col items-center gap-2 px-3 py-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-center">
+                                <i data-lucide="zap" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
+                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400">Fullstack</span>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Frontend Skills -->
-                <div data-aos="fade-left">
-                    <h3 class="text-2xl font-heading font-semibold mb-6 text-primary-400 flex items-center">
-                        <i class="fas fa-laptop-code mr-3"></i>
-                        Frontend Development
-                    </h3>
-                    
-                    <div class="space-y-6">
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Vue.js / Nuxt.js</span>
-                                <span class="text-primary-400 font-medium">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[85%]"></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">React / Next.js</span>
-                                <span class="text-primary-400 font-medium">80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[80%]"></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">Inertia.js</span>
-                                <span class="text-primary-400 font-medium">85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[85%]"></div>
-                            </div>
-                        </div>
-
-                        <div>
-                            <div class="flex justify-between mb-2">
-                                <span class="font-medium">HTML5 / CSS3 / Tailwind</span>
-                                <span class="text-primary-400 font-medium">90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress w-[90%]"></div>
-                            </div>
+                    <div class="md:col-span-2" data-aos="fade-left">
+                        <div class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30">
+                            <h4 class="text-sm font-mono text-teal-500 dark:text-teal-400 mb-5 uppercase tracking-wider">What I Do</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Build enterprise-grade Laravel applications
+                                </li>
+                                <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Develop modern SPAs with Vue.js & React
+                                </li>
+                                <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Design RESTful APIs & integrate third-party services
+                                </li>
+                                <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Optimize database performance & query efficiency
+                                </li>
+                                <li class="flex items-start gap-3 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Refactor legacy code into modern, maintainable systems
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Tools & Technologies -->
-            <div class="mt-16" data-aos="fade-up">
-                <h3 class="text-2xl font-heading font-semibold mb-6 text-center text-primary-400">Tools & Technologies</h3>
-                <div class="flex flex-wrap justify-center gap-6">
-                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
-                        <i class="fab fa-git-alt text-3xl mb-2 text-primary-400"></i>
-                        <div class="text-sm">Git / GitHub</div>
+        <!-- SKILLS -->
+        <section id="skills" class="py-24 px-6 lg:px-12 border-t border-slate-100 dark:border-slate-800/50">
+            <div class="max-w-4xl mx-auto">
+                <p class="font-mono text-sm text-teal-500 dark:text-teal-400 mb-2" data-aos="fade-up">02.</p>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12" data-aos="fade-up">Skills</h2>
+
+                <div class="space-y-10">
+                    <!-- Backend -->
+                    <div data-aos="fade-up">
+                        <h3 class="text-sm font-mono text-teal-500 dark:text-teal-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <i data-lucide="server" class="w-4 h-4"></i>
+                            Backend
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-700 dark:text-slate-300">PHP 8 / Laravel</span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-700 dark:text-slate-300">MySQL / PostgreSQL</span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-700 dark:text-slate-300">RESTful APIs</span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-700 dark:text-slate-300">Redis / Queues</span>
+                        </div>
                     </div>
-                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
-                        <i class="fas fa-docker text-3xl mb-2 text-primary-400"></i>
-                        <div class="text-sm">Docker</div>
+
+                    <!-- Frontend -->
+                    <div data-aos="fade-up" data-aos-delay="100">
+                        <h3 class="text-sm font-mono text-teal-500 dark:text-teal-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <i data-lucide="monitor" class="w-4 h-4"></i>
+                            Frontend
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-700 dark:text-slate-300">Vue.js / Nuxt.js</span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-700 dark:text-slate-300">React / Next.js</span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-700 dark:text-slate-300">Inertia.js</span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-700 dark:text-slate-300">TypeScript <span class="ml-1 text-[10px] font-mono text-teal-500 dark:text-teal-400">learning</span></span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-700 dark:text-slate-300">HTML5 / CSS3 / Tailwind</span>
+                        </div>
                     </div>
-                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
-                        <i class="fas fa-database text-3xl mb-2 text-primary-400"></i>
-                        <div class="text-sm">SQL Server</div>
-                    </div>
-                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
-                        <i class="fas fa-robot text-3xl mb-2 text-primary-400"></i>
-                        <div class="text-sm">AI Tools</div>
-                    </div>
-                    <div class="glass-hover glass p-6 rounded-xl text-center min-w-[120px]">
-                        <i class="fas fa-tachometer-alt text-3xl mb-2 text-primary-400"></i>
-                        <div class="text-sm">Linux</div>
+
+                    <!-- Tools -->
+                    <div data-aos="fade-up" data-aos-delay="200">
+                        <h3 class="text-sm font-mono text-teal-500 dark:text-teal-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                            <i data-lucide="wrench" class="w-4 h-4"></i>
+                            Tools & Technologies
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-600 dark:text-slate-400">
+                                <i data-lucide="git-branch" class="w-3.5 h-3.5 inline-block mr-1.5 text-teal-500 dark:text-teal-400"></i>Git / GitHub
+                            </span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-600 dark:text-slate-400">
+                                <i data-lucide="box" class="w-3.5 h-3.5 inline-block mr-1.5 text-teal-500 dark:text-teal-400"></i>Docker
+                            </span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-600 dark:text-slate-400">
+                                <i data-lucide="database" class="w-3.5 h-3.5 inline-block mr-1.5 text-teal-500 dark:text-teal-400"></i>SQL Server
+                            </span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-600 dark:text-slate-400">
+                                <i data-lucide="bot" class="w-3.5 h-3.5 inline-block mr-1.5 text-teal-500 dark:text-teal-400"></i>AI Tools
+                            </span>
+                            <span class="skill-badge px-4 py-2 rounded-full border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50 text-sm text-slate-600 dark:text-slate-400">
+                                <i data-lucide="terminal" class="w-3.5 h-3.5 inline-block mr-1.5 text-teal-500 dark:text-teal-400"></i>Linux
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-20 px-6 bg-dark-900">
-        <div class="max-w-5xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl font-heading font-bold mb-4">Work Experience</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
-            </div>
+        <!-- EXPERIENCE -->
+        <section id="experience" class="py-24 px-6 lg:px-12 border-t border-slate-100 dark:border-slate-800/50">
+            <div class="max-w-4xl mx-auto">
+                <p class="font-mono text-sm text-teal-500 dark:text-teal-400 mb-2" data-aos="fade-up">03.</p>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12" data-aos="fade-up">Experience</h2>
 
-            <div class="space-y-8">
-                <!-- Experience 1 -->
-                <div class="glass p-8 rounded-2xl" data-aos="fade-up">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                <div class="space-y-8">
+                    <!-- Exp 1 -->
+                    <div class="relative pl-8 border-l-2 border-slate-200 dark:border-slate-800" data-aos="fade-up">
+                        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-teal-500 dark:bg-teal-400 border-4 border-slate-50 dark:border-[#0f172a]"></div>
+                        <div class="pb-8">
+                            <span class="font-mono text-xs text-teal-500 dark:text-teal-400">2022 — Present</span>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mt-1">Fullstack Developer</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-500 mt-0.5">B2B SaaS Applications</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                Building and maintaining production-ready B2B SaaS applications including POS, HRIS, inventory management, and finance systems using Laravel, Vue.js, and React.
+                            </p>
+                            <ul class="mt-4 space-y-2">
+                                <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Developed full-stack applications with Laravel 10/11 and Vue.js/React
+                                </li>
+                                <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Integrated third-party APIs including Fazpass (WhatsApp/SMS OTP) and payment gateways
+                                </li>
+                                <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Optimized database queries and implemented Redis for queue management
+                                </li>
+                                <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Refactored legacy monolithic code into modular, maintainable architecture
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Exp 2 -->
+                    <div class="relative pl-8 border-l-2 border-slate-200 dark:border-slate-800" data-aos="fade-up" data-aos-delay="100">
+                        <div class="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-teal-500 dark:bg-teal-400 border-4 border-slate-50 dark:border-[#0f172a]"></div>
                         <div>
-                            <h3 class="text-2xl font-heading font-semibold text-primary-400">Fullstack Developer</h3>
-                            <p class="text-dark-300 mt-1">B2B SaaS Applications</p>
+                            <span class="font-mono text-xs text-teal-500 dark:text-teal-400">2021 — 2022</span>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mt-1">Laravel Specialist</h3>
+                            <p class="text-sm text-slate-500 dark:text-slate-500 mt-0.5">Enterprise Systems</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-3 leading-relaxed">
+                                Focused on backend development using Laravel ecosystem, building robust APIs and database-driven applications for enterprise clients.
+                            </p>
+                            <ul class="mt-4 space-y-2">
+                                <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Built RESTful APIs for internal and external integrations
+                                </li>
+                                <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Implemented authentication systems (JWT, OAuth) and role-based access control
+                                </li>
+                                <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Worked with MySQL and PostgreSQL for complex data modeling
+                                </li>
+                                <li class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-400">
+                                    <i data-lucide="chevron-right" class="w-4 h-4 text-teal-500 dark:text-teal-400 mt-0.5 shrink-0"></i>
+                                    Collaborated with frontend teams to deliver seamless user experiences
+                                </li>
+                            </ul>
                         </div>
-                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium mt-3 md:mt-0">2022 - Present</span>
-                    </div>
-                    <p class="text-dark-300 mb-6">
-                        Building and maintaining production-ready B2B SaaS applications including POS, HRIS, inventory management, and finance systems using Laravel, Vue.js, and React.
-                    </p>
-                    <ul class="space-y-3 text-dark-300">
-                        <li class="flex items-start">
-                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
-                            <span>Developed full-stack applications with Laravel 10/11 and Vue.js/React</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
-                            <span>Integrated third-party APIs including Fazpass (WhatsApp/SMS OTP) and payment gateways</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
-                            <span>Optimized database queries and implemented Redis for queue management</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
-                            <span>Refactored legacy monolithic code into modular, maintainable architecture</span>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Experience 2 -->
-                <div class="glass p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
-                        <div>
-                            <h3 class="text-2xl font-heading font-semibold text-primary-400">Laravel Specialist</h3>
-                            <p class="text-dark-300 mt-1">Enterprise Systems</p>
-                        </div>
-                        <span class="glass px-4 py-2 rounded-lg text-sm font-medium mt-3 md:mt-0">2021 - 2022</span>
-                    </div>
-                    <p class="text-dark-300 mb-6">
-                        Focused on backend development using Laravel ecosystem, building robust APIs and database-driven applications for enterprise clients.
-                    </p>
-                    <ul class="space-y-3 text-dark-300">
-                        <li class="flex items-start">
-                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
-                            <span>Built RESTful APIs for internal and external integrations</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
-                            <span>Implemented authentication systems (JWT, OAuth) and role-based access control</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
-                            <span>Worked with MySQL and PostgreSQL for complex data modeling</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-chevron-right text-primary-500 mt-1 mr-3"></i>
-                            <span>Collaborated with frontend teams to deliver seamless user experiences</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 px-6 bg-dark-800/50">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl font-heading font-bold mb-4">Featured Projects</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Project 1 -->
-                <div class="project-card glass p-8 rounded-2xl" data-aos="fade-up">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-3">
-                            <i class="fas fa-shopping-cart text-white"></i>
-                        </div>
-                        <h3 class="text-2xl font-heading font-semibold">myRotte.id</h3>
-                    </div>
-                    <p class="text-dark-300 mb-6">
-                        A comprehensive POS and inventory management system built with Laravel and Vue.js for retail businesses.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="glass px-3 py-1 rounded text-xs">Laravel 11</span>
-                        <span class="glass px-3 py-1 rounded text-xs">Vue.js</span>
-                        <span class="glass px-3 py-1 rounded text-xs">MySQL</span>
-                        <span class="glass px-3 py-1 rounded text-xs">REST API</span>
-                        <span class="glass px-3 py-1 rounded text-xs">Inertia.js</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-primary-400 font-medium">Production System</span>
-                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-card glass p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-3">
-                            <i class="fas fa-building text-white"></i>
-                        </div>
-                        <h3 class="text-2xl font-heading font-semibold">Simbada</h3>
-                    </div>
-                    <p class="text-dark-300 mb-6">
-                        HRIS and asset management platform for enterprise clients, featuring employee tracking, attendance, and resource allocation.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="glass px-3 py-1 rounded text-xs">Laravel 10</span>
-                        <span class="glass px-3 py-1 rounded text-xs">React</span>
-                        <span class="glass px-3 py-1 rounded text-xs">PostgreSQL</span>
-                        <span class="glass px-3 py-1 rounded text-xs">JWT Auth</span>
-                        <span class="glass px-3 py-1 rounded text-xs">Redis</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-primary-400 font-medium">Enterprise Solution</span>
-                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card glass p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-3">
-                            <i class="fas fa-file-invoice-dollar text-white"></i>
-                        </div>
-                        <h3 class="text-2xl font-heading font-semibold">Finance System</h3>
-                    </div>
-                    <p class="text-dark-300 mb-6">
-                        Financial calculation and reporting engine with data visualization using Chart.js and Laravel Collections.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="glass px-3 py-1 rounded text-xs">Laravel</span>
-                        <span class="glass px-3 py-1 rounded text-xs">Vue.js</span>
-                        <span class="glass px-3 py-1 rounded text-xs">Chart.js</span>
-                        <span class="glass px-3 py-1 rounded text-xs">Laravel Collections</span>
-                        <span class="glass px-3 py-1 rounded text-xs">API Integration</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-primary-400 font-medium">Financial Platform</span>
-                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 4 -->
-                <div class="project-card glass p-8 rounded-2xl" data-aos="fade-up" data-aos-delay="300">
-                    <div class="flex items-center mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-3">
-                            <i class="fas fa-mobile-alt text-white"></i>
-                        </div>
-                        <h3 class="text-2xl font-heading font-semibold">Fazpass Integration</h3>
-                    </div>
-                    <p class="text-dark-300 mb-6">
-                        WhatsApp/SMS OTP authentication system integration for user verification and security enhancement.
-                    </p>
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="glass px-3 py-1 rounded text-xs">Fazpass API</span>
-                        <span class="glass px-3 py-1 rounded text-xs">WhatsApp API</span>
-                        <span class="glass px-3 py-1 rounded text-xs">Webhooks</span>
-                        <span class="glass px-3 py-1 rounded text-xs">Laravel</span>
-                        <span class="glass px-3 py-1 rounded text-xs">Security</span>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-primary-400 font-medium">Telecom Integration</span>
-                        <a href="#" class="text-primary-400 hover:text-primary-300 transition-colors">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 px-6 bg-dark-900">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-4xl font-heading font-bold mb-4">Get In Touch</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-primary-500 to-primary-700 mx-auto rounded-full"></div>
-                <p class="text-dark-300 mt-4 max-w-2xl mx-auto">
+        <!-- PROJECTS -->
+        <section id="projects" class="py-24 px-6 lg:px-12 border-t border-slate-100 dark:border-slate-800/50">
+            <div class="max-w-4xl mx-auto">
+                <p class="font-mono text-sm text-teal-500 dark:text-teal-400 mb-2" data-aos="fade-up">04.</p>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-12" data-aos="fade-up">Projects</h2>
+
+                <div class="grid sm:grid-cols-2 gap-6">
+                    <!-- Project 1: myRotte.id -->
+                    <div class="project-card group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30 relative overflow-hidden" data-aos="fade-up">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center">
+                                <i data-lucide="shopping-cart" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20">Production System</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">myRotte.id</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                            A comprehensive POS and inventory management system built with Laravel and Vue.js for retail businesses.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Laravel 11</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Vue.js</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">MySQL</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Inertia.js</span>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-slate-900/60 flex items-center justify-center rounded-2xl">
+                            <span class="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm">Private Project</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: Simbada -->
+                    <div class="project-card group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30 relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center">
+                                <i data-lucide="building-2" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">Enterprise Solution</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Simbada</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                            HRIS and asset management platform for enterprise clients, featuring employee tracking, attendance, and resource allocation.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Laravel 10</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">React</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">PostgreSQL</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Redis</span>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-slate-900/60 flex items-center justify-center rounded-2xl">
+                            <span class="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm">Private Project</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Finance System -->
+                    <div class="project-card group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30 relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center">
+                                <i data-lucide="file-text" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-500/20">Financial Platform</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Finance System</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                            Financial calculation and reporting engine with data visualization using Chart.js and Laravel Collections.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Laravel</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Vue.js</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Chart.js</span>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-slate-900/60 flex items-center justify-center rounded-2xl">
+                            <span class="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm">Private Project</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Fazpass Integration -->
+                    <div class="project-card group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30 relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center">
+                                <i data-lucide="smartphone" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-orange-500/10 text-orange-600 dark:text-orange-400 border border-orange-500/20">Telecom Integration</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Fazpass Integration</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                            WhatsApp/SMS OTP authentication system integration for user verification and security enhancement.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Fazpass API</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">WhatsApp</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Laravel</span>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-slate-900/60 flex items-center justify-center rounded-2xl">
+                            <span class="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm">Private Project</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 5: Organia (NEW) -->
+                    <div class="project-card group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30 relative overflow-hidden" data-aos="fade-up" data-aos-delay="400">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center">
+                                <i data-lucide="users" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border border-yellow-500/20">In Development</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Organia</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                            SaaS platform manajemen organisasi & kader — presensi, generate dokumen, pelaporan, OCR bendahara, tracking jenjang kader, dan role-based access control.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Laravel</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">React</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">TypeScript</span>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-slate-900/60 flex items-center justify-center rounded-2xl">
+                            <span class="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm">In Development</span>
+                        </div>
+                    </div>
+
+                    <!-- Project 6: AFH Projects (NEW) -->
+                    <div class="project-card group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30 relative overflow-hidden" data-aos="fade-up" data-aos-delay="500">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center">
+                                <i data-lucide="blocks" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
+                            </div>
+                            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium bg-yellow-500/10 text-yellow-600 dark:text-yellow-400 border border-yellow-500/20">In Development</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">AFH Projects</h3>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
+                            Website builder SaaS untuk UMKM Indonesia — drag-and-drop editor dengan GrapesJS, integrasi pembayaran Midtrans, model subscription tier.
+                        </p>
+                        <div class="flex flex-wrap gap-1.5 mb-4">
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Node.js</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Vue 3</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">PostgreSQL</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">GrapesJS</span>
+                            <span class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">Midtrans</span>
+                        </div>
+                        <div class="overlay absolute inset-0 bg-slate-900/60 flex items-center justify-center rounded-2xl">
+                            <span class="px-4 py-2 rounded-lg text-sm font-medium bg-white/10 text-white border border-white/20 backdrop-blur-sm">In Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="py-24 px-6 lg:px-12 border-t border-slate-100 dark:border-slate-800/50">
+            <div class="max-w-4xl mx-auto">
+                <p class="font-mono text-sm text-teal-500 dark:text-teal-400 mb-2" data-aos="fade-up">05.</p>
+                <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4" data-aos="fade-up">Get in Touch</h2>
+                <p class="text-slate-500 dark:text-slate-400 mb-12 max-w-xl" data-aos="fade-up">
                     I'm always open to discussing new projects, creative ideas, or opportunities to collaborate.
                 </p>
-            </div>
 
-            <div class="grid md:grid-cols-2 gap-12">
-                <!-- Contact Info -->
-                <div data-aos="fade-right">
-                    <div class="space-y-8">
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-envelope text-white"></i>
+                <div class="grid md:grid-cols-2 gap-12">
+                    <!-- Contact info -->
+                    <div class="space-y-4" data-aos="fade-right">
+                        <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center shrink-0">
+                                <i data-lucide="mail" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
                             </div>
-                            <div>
-                                <h4 class="font-heading font-semibold mb-1">Email</h4>
-                                <a href="mailto:fharahap85@gmail.com" class="email-copy text-dark-300 hover:text-primary-400 transition-colors break-words">
-                                    fharahap85@gmail.com
-                                </a>
+                            <div class="min-w-0">
+                                <h4 class="text-sm font-medium text-slate-900 dark:text-white">Email</h4>
+                                <a href="mailto:fharahap85@gmail.com" class="email-copy text-sm text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors break-all">fharahap85@gmail.com</a>
                             </div>
                         </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fas fa-map-marker-alt text-white"></i>
+                        <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center shrink-0">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
                             </div>
                             <div>
-                                <h4 class="font-heading font-semibold mb-1">Location</h4>
-                                <p class="text-dark-300">Pekanbaru, Riau, Indonesia</p>
+                                <h4 class="text-sm font-medium text-slate-900 dark:text-white">Location</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">Pekanbaru, Riau, Indonesia</p>
                             </div>
                         </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fab fa-linkedin-in text-white"></i>
+                        <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center shrink-0">
+                                <i data-lucide="linkedin" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
                             </div>
                             <div>
-                                <h4 class="font-heading font-semibold mb-1">LinkedIn</h4>
-                                <a href="https://www.linkedin.com/in/abdullah-fikri-harahap-916704110/" target="_blank" class="text-dark-300 hover:text-primary-400 transition-colors break-words">
-                                    linkedin.com/in/abdullah-fikri-harahap
-                                </a>
+                                <h4 class="text-sm font-medium text-slate-900 dark:text-white">LinkedIn</h4>
+                                <a href="https://www.linkedin.com/in/abdullah-fikri-harahap-916704110/" target="_blank" class="text-sm text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors break-all">linkedin.com/in/abdullah-fikri-harahap</a>
                             </div>
                         </div>
-
-                        <div class="flex items-start">
-                            <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center mr-4 flex-shrink-0">
-                                <i class="fab fa-github text-white"></i>
+                        <div class="flex items-center gap-4 p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30">
+                            <div class="w-10 h-10 rounded-lg bg-teal-500/10 dark:bg-teal-400/10 flex items-center justify-center shrink-0">
+                                <i data-lucide="github" class="w-5 h-5 text-teal-500 dark:text-teal-400"></i>
                             </div>
                             <div>
-                                <h4 class="font-heading font-semibold mb-1">GitHub</h4>
-                                <a href="#" target="_blank" class="text-dark-300 hover:text-primary-400 transition-colors break-words">
-                                    github.com/yourusername
-                                </a>
+                                <h4 class="text-sm font-medium text-slate-900 dark:text-white">GitHub</h4>
+                                <a href="https://github.com/fharahap85" target="_blank" class="text-sm text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-400 transition-colors break-all">github.com/fharahap85</a>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Contact Form -->
-                <div data-aos="fade-left">
-                    <div class="glass p-8 rounded-2xl">
-                        <form id="contactForm">
-                            <div class="mb-6">
-                                <label class="block text-sm font-medium mb-2">Name</label>
-                                <input type="text" class="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:outline-none focus:border-primary-500 transition-colors" placeholder="Your name">
+                    <!-- Contact form -->
+                    <div data-aos="fade-left">
+                        <form id="contactForm" class="p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/30 space-y-5">
+                            <div class="relative">
+                                <input type="text" id="name" required class="peer w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white placeholder-transparent focus:outline-none focus:border-teal-500 dark:focus:border-teal-400 transition-colors" placeholder="Name">
+                                <label for="name" class="absolute left-4 top-3 text-sm text-slate-400 dark:text-slate-500 transition-all peer-focus:-translate-y-6 peer-focus:text-xs peer-focus:text-teal-500 dark:peer-focus:text-teal-400 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">Name</label>
                             </div>
-                            <div class="mb-6">
-                                <label class="block text-sm font-medium mb-2">Email</label>
-                                <input type="email" class="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:outline-none focus:border-primary-500 transition-colors" placeholder="your@email.com">
+                            <div class="relative">
+                                <input type="email" id="email" required class="peer w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white placeholder-transparent focus:outline-none focus:border-teal-500 dark:focus:border-teal-400 transition-colors" placeholder="Email">
+                                <label for="email" class="absolute left-4 top-3 text-sm text-slate-400 dark:text-slate-500 transition-all peer-focus:-translate-y-6 peer-focus:text-xs peer-focus:text-teal-500 dark:peer-focus:text-teal-400 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">Email</label>
                             </div>
-                            <div class="mb-6">
-                                <label class="block text-sm font-medium mb-2">Message</label>
-                                <textarea class="w-full px-4 py-3 bg-dark-800 border border-dark-600 rounded-lg focus:outline-none focus:border-primary-500 transition-colors resize-none" rows="4" placeholder="Your message..."></textarea>
+                            <div class="relative">
+                                <textarea id="message" rows="4" required class="peer w-full px-4 py-3 bg-transparent border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-white placeholder-transparent focus:outline-none focus:border-teal-500 dark:focus:border-teal-400 transition-colors resize-none" placeholder="Message"></textarea>
+                                <label for="message" class="absolute left-4 top-3 text-sm text-slate-400 dark:text-slate-500 transition-all peer-focus:-translate-y-6 peer-focus:text-xs peer-focus:text-teal-500 dark:peer-focus:text-teal-400 peer-[:not(:placeholder-shown)]:-translate-y-6 peer-[:not(:placeholder-shown)]:text-xs pointer-events-none">Message</label>
                             </div>
-                            <button type="submit" class="gradient-border glass w-full px-6 py-4 rounded-lg font-medium hover:shadow-lg hover:shadow-primary-500/30 transition-all">
+                            <button type="submit" class="w-full px-6 py-3 rounded-lg font-medium bg-teal-500 hover:bg-teal-400 text-white dark:text-slate-900 transition-all hover:shadow-lg hover:shadow-teal-500/25">
                                 Send Message
                             </button>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer class="py-12 px-6 bg-dark-900/90 border-t border-dark-700">
-        <div class="max-w-5xl mx-auto text-center">
-            <div class="text-2xl font-heading font-bold mb-4 bg-gradient-to-r from-primary-400 to-primary-600 bg-clip-text text-transparent">
-                AFH
+        <!-- FOOTER -->
+        <footer class="py-10 px-6 lg:px-12 border-t border-slate-200 dark:border-slate-800">
+            <div class="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div>
+                    <span class="font-bold text-slate-900 dark:text-white">AFH</span>
+                    <span class="text-slate-400 dark:text-slate-600 mx-2">&middot;</span>
+                    <span class="text-sm text-slate-500 dark:text-slate-500">Fullstack Developer</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://github.com/fharahap85" target="_blank" aria-label="GitHub" class="text-slate-400 dark:text-slate-600 hover:text-slate-900 dark:hover:text-white transition-colors">
+                        <i data-lucide="github" class="w-5 h-5"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/abdullah-fikri-harahap-916704110/" target="_blank" aria-label="LinkedIn" class="text-slate-400 dark:text-slate-600 hover:text-[#0077b5] transition-colors">
+                        <i data-lucide="linkedin" class="w-5 h-5"></i>
+                    </a>
+                    <a href="mailto:fharahap85@gmail.com" aria-label="Email" class="text-slate-400 dark:text-slate-600 hover:text-teal-500 dark:hover:text-teal-400 transition-colors">
+                        <i data-lucide="mail" class="w-5 h-5"></i>
+                    </a>
+                </div>
+                <p class="text-xs text-slate-400 dark:text-slate-600">&copy; 2026 Abdullah Fikri Harahap</p>
             </div>
-            <p class="text-dark-400 mb-6">
-                Fullstack Developer | Laravel Specialist | Building Scalable B2B SaaS Solutions
-            </p>
-            <div class="flex justify-center space-x-6 mb-6">
-                <a href="#" class="text-dark-400 hover:text-primary-400 transition-colors">
-                    <i class="fab fa-github text-2xl"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/abdullah-fikri-harahap-916704110/" target="_blank" class="text-dark-400 hover:text-primary-400 transition-colors">
-                    <i class="fab fa-linkedin-in text-2xl"></i>
-                </a>
-                <a href="mailto:fharahap85@gmail.com" class="text-dark-400 hover:text-primary-400 transition-colors">
-                    <i class="fas fa-envelope text-2xl"></i>
-                </a>
-            </div>
-            <p class="text-dark-500 text-sm">
-                © 2026 Abdullah Fikri Harahap. All rights reserved.
-            </p>
-        </div>
-    </footer>
+        </footer>
+    </main>
 
-    <!-- AOS Animation Script -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    
     <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 100
+        // Theme toggle
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light' || (!savedTheme && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.remove('dark');
+        }
+
+        function toggleTheme() {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+            lucide.createIcons();
+        }
+
+        document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+        document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+        // Mobile menu
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle?.addEventListener('click', () => mobileMenu.classList.remove('translate-x-full'));
+        menuClose?.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
+        mobileMenu?.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('translate-x-full'));
         });
+
+        // Sidebar active link tracking
+        const sections = document.querySelectorAll('section[id]');
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+        function updateActiveLink() {
+            let current = '';
+            sections.forEach(section => {
+                if (window.scrollY >= section.offsetTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            sidebarLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+            });
+        }
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();
+
+        // AOS
+        AOS.init({ duration: 800, once: true, offset: 100 });
+
+        // Lucide icons
+        lucide.createIcons();
 
         // Typing effect
         const typingText = document.querySelector('.typing-text');
-        const phrases = [
-            'Fullstack Developer',
-            'Laravel Specialist',
-            'B2B SaaS Builder',
-            'API Integrator',
-            'Code Refactorer'
-        ];
-        
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let isPaused = false;
+        const phrases = ['Fullstack Developer', 'Laravel Specialist', 'B2B SaaS Builder', 'API Integrator', 'Code Refactorer'];
+        let phraseIndex = 0, charIndex = 0, isDeleting = false;
 
         function type() {
-            const currentPhrase = phrases[phraseIndex];
-            
+            const current = phrases[phraseIndex];
             if (isDeleting) {
-                typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+                typingText.textContent = current.substring(0, charIndex - 1);
                 charIndex--;
-                
-                if (charIndex === 0) {
-                    isDeleting = false;
-                    phraseIndex = (phraseIndex + 1) % phrases.length;
-                    setTimeout(type, 500);
-                    return;
-                }
+                if (charIndex === 0) { isDeleting = false; phraseIndex = (phraseIndex + 1) % phrases.length; setTimeout(type, 500); return; }
             } else {
-                typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+                typingText.textContent = current.substring(0, charIndex + 1);
                 charIndex++;
-                
-                if (charIndex === currentPhrase.length) {
-                    isDeleting = true;
-                    setTimeout(type, 2000);
-                    return;
-                }
+                if (charIndex === current.length) { isDeleting = true; setTimeout(type, 2000); return; }
             }
-            
             setTimeout(type, isDeleting ? 50 : 100);
         }
-
-        // Start typing effect
         setTimeout(type, 1000);
 
-        // Cursor blink animation
+        // Cursor blink
         setInterval(() => {
-            const cursor = document.querySelector('.cursor-blink');
-            cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0';
+            const c = document.querySelector('.cursor-blink');
+            if (c) c.style.opacity = c.style.opacity === '0' ? '1' : '0';
         }, 500);
 
-        // Custom cursor
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-
-        if (cursorDot && cursorOutline) {
-            window.addEventListener('mousemove', (e) => {
-                const posX = e.clientX;
-                const posY = e.clientY;
-                
-                cursorDot.style.left = `${posX}px`;
-                cursorDot.style.top = `${posY}px`;
-                
-                cursorOutline.style.left = `${posX}px`;
-                cursorOutline.style.top = `${posY}px`;
+        // Email copy
+        document.querySelector('.email-copy')?.addEventListener('click', e => {
+            e.preventDefault();
+            navigator.clipboard.writeText('fharahap85@gmail.com').then(() => {
+                const el = e.currentTarget;
+                const original = el.textContent;
+                el.textContent = 'Copied!';
+                el.classList.add('text-teal-500');
+                setTimeout(() => { el.textContent = original; el.classList.remove('text-teal-500'); }, 2000);
             });
+        });
 
-            // Links interaction
-            const links = document.querySelectorAll('a, button, .glass-hover');
-            links.forEach(link => {
-                link.addEventListener('mouseover', () => {
-                    cursorDot.style.transform = 'translate(-50%, -50%) scale(2)';
-                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-                    cursorOutline.style.width = '30px';
-                    cursorOutline.style.height = '30px';
-                });
-                
-                link.addEventListener('mouseout', () => {
-                    cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-                    cursorOutline.style.width = '40px';
-                    cursorOutline.style.height = '40px';
-                });
-            });
-        }
-
-        // Email copy functionality
-        const emailLink = document.querySelector('.email-copy');
-        if (emailLink) {
-            emailLink.addEventListener('click', (e) => {
-                e.preventDefault();
-                navigator.clipboard.writeText('fharahap85@gmail.com').then(() => {
-                    emailLink.classList.add('copied');
-                    setTimeout(() => {
-                        emailLink.classList.remove('copied');
-                    }, 2000);
-                });
-            });
-        }
-
-        // Contact form submission
-        const contactForm = document.getElementById('contactForm');
-        if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('Thank you for your message! I will get back to you soon.');
-                contactForm.reset();
-            });
-        }
-
-        // Skill bars animation on scroll
-        const skillBars = document.querySelectorAll('.skill-bar');
-        
-        function checkSkillBars() {
-            skillBars.forEach(bar => {
-                const rect = bar.getBoundingClientRect();
-                if (rect.top < window.innerHeight - 100) {
-                    bar.classList.add('visible');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', checkSkillBars);
-        checkSkillBars(); // Initial check
+        // Contact form
+        document.getElementById('contactForm')?.addEventListener('submit', e => {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            e.target.reset();
+        });
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -978,10 +807,7 @@
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
+                    window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
                 }
             });
         });
