@@ -1,7 +1,6 @@
 "use client";
 
-import { type ReactNode } from "react";
-import Reveal from "./Reveal";
+import { useEffect, useRef, type ReactNode } from "react";
 
 type GlowSide = "tl" | "tr" | "bl" | "br" | "top" | "bottom";
 
@@ -44,26 +43,45 @@ export default function BentoCard({
   hoverEffect = true,
   delay = 0,
 }: BentoCardProps) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => el.classList.add("in-view"), delay);
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
+
   return (
-    <Reveal delay={delay}>
+    <div
+      ref={ref}
+      className={`
+        reveal group glow-card glow-border relative overflow-hidden rounded-2xl
+        border border-white/[0.06]
+        bg-white/[0.02] backdrop-blur-xl
+        ${hoverEffect ? "hover:-translate-y-0.5 hover:border-white/20 hover:shadow-2xl hover:shadow-black/30" : ""}
+        transition-all duration-500 ease-out
+        ${className}
+      `}
+    >
       <div
-        className={`
-          group glow-card glow-border relative overflow-hidden rounded-2xl
-          border border-white/[0.06]
-          bg-white/[0.02] backdrop-blur-xl
-          ${hoverEffect ? "hover:-translate-y-0.5 hover:border-white/20 hover:shadow-2xl hover:shadow-black/30" : ""}
-          transition-all duration-500 ease-out
-          ${className}
-        `}
-      >
-        <div
-          className={`glow-orb ${glowPositions[glowSide]} ${getGlowColor(glowColor)}`}
-        />
+        className={`glow-orb ${glowPositions[glowSide]} ${getGlowColor(glowColor)}`}
+      />
 
-        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
 
-        <div className="relative z-[1] h-full">{children}</div>
-      </div>
-    </Reveal>
+      <div className="relative z-[1] h-full">{children}</div>
+    </div>
   );
 }

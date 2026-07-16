@@ -74,7 +74,7 @@ export default function HeroSection() {
       <div className="mt-6 flex flex-wrap gap-3">
         <a
           href="#contact"
-          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:from-blue-400 hover:to-violet-400 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105"
+          className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:from-blue-400 hover:to-violet-400 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105"
         >
           Get in Touch
           <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
