@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode } from "react";
+import Reveal from "./Reveal";
 
 type GlowSide = "tl" | "tr" | "bl" | "br" | "top" | "bottom";
 
@@ -10,6 +11,7 @@ interface BentoCardProps {
   glowSide?: GlowSide;
   glowColor?: string;
   hoverEffect?: boolean;
+  delay?: number;
 }
 
 const glowPositions: Record<GlowSide, string> = {
@@ -40,25 +42,28 @@ export default function BentoCard({
   glowSide = "tr",
   glowColor = "blue",
   hoverEffect = true,
+  delay = 0,
 }: BentoCardProps) {
   return (
-    <div
-      className={`
-        group glow-card relative overflow-hidden rounded-2xl
-        border border-white/[0.06]
-        bg-white/[0.02] backdrop-blur-xl
-        ${hoverEffect ? "hover:-translate-y-0.5 hover:border-white/20 hover:shadow-2xl hover:shadow-black/30" : ""}
-        transition-all duration-500 ease-out
-        ${className}
-      `}
-    >
+    <Reveal delay={delay}>
       <div
-        className={`glow-orb ${glowPositions[glowSide]} ${getGlowColor(glowColor)}`}
-      />
+        className={`
+          group glow-card glow-border relative overflow-hidden rounded-2xl
+          border border-white/[0.06]
+          bg-white/[0.02] backdrop-blur-xl
+          ${hoverEffect ? "hover:-translate-y-0.5 hover:border-white/20 hover:shadow-2xl hover:shadow-black/30" : ""}
+          transition-all duration-500 ease-out
+          ${className}
+        `}
+      >
+        <div
+          className={`glow-orb ${glowPositions[glowSide]} ${getGlowColor(glowColor)}`}
+        />
 
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.02] to-transparent pointer-events-none" />
 
-      <div className="relative z-[1] h-full">{children}</div>
-    </div>
+        <div className="relative z-[1] h-full">{children}</div>
+      </div>
+    </Reveal>
   );
 }
