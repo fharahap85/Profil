@@ -1,0 +1,24 @@
+name: Daily Activity
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  commit:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update activity log
+        run: |
+          echo "$(date -u '+%Y-%m-%dT%H:%M:%SZ') - automated commit" >> activity.log
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add activity.log
+          git commit -m "chore: daily activity $(date -u '+%Y-%m-%d')" || echo "No changes"
+          git push
