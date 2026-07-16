@@ -1,3 +1,5 @@
+"use client";
+
 import { skills } from "@/lib/data";
 
 const categoryIcons: Record<string, string> = {
@@ -31,7 +33,7 @@ export default function SkillsSection() {
 
       <div className="mt-5 space-y-5 overflow-y-auto">
         {(Object.keys(skills) as Array<keyof typeof skills>).map(
-          (category) => (
+          (category, ci) => (
             <div key={category}>
               <h3
                 className={`font-mono text-[11px] font-medium tracking-wider uppercase ${categoryColors[category] ?? "text-zinc-400"}`}
@@ -39,10 +41,14 @@ export default function SkillsSection() {
                 {categoryIcons[category] ?? "▸"} {category}
               </h3>
               <div className="mt-2 flex flex-wrap gap-1.5">
-                {skills[category].map((skill) => (
+                {skills[category].map((skill, si) => (
                   <span
                     key={skill.name}
-                    className="inline-block rounded-lg border border-white/[0.06] bg-white/[0.03] px-2.5 py-1 text-[12px] text-zinc-300 transition-all hover:border-white/15 hover:bg-white/[0.06]"
+                    className="inline-block rounded-lg border border-white/[0.06] bg-white/[0.03] px-2.5 py-1 text-[12px] text-zinc-300 transition-all duration-300 hover:border-white/15 hover:bg-white/[0.06] hover:scale-105"
+                    style={{
+                      animation: `fadeInUp 0.4s ease-out ${(ci * 3 + si) * 0.05}s forwards`,
+                      opacity: 0,
+                    }}
                   >
                     {skill.name}
                   </span>
