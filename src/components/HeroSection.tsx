@@ -35,7 +35,7 @@ export default function HeroSection() {
   return (
     <div className="flex h-full flex-col justify-center p-6 sm:p-8 lg:p-10">
       <div className="mb-4 flex items-center gap-2">
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/5 px-3 py-1 text-[11px] font-medium tracking-wide text-green-400">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-green-500/20 bg-green-500/5 px-3 py-1 text-[11px] font-medium tracking-wide text-green-400 float-orb">
           <span className="h-1.5 w-1.5 rounded-full bg-green-400 animate-pulse" />
           {personal.status}
         </span>
@@ -74,14 +74,14 @@ export default function HeroSection() {
       <div className="mt-6 flex flex-wrap gap-3">
         <a
           href="#contact"
-          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:from-blue-400 hover:to-violet-400 hover:shadow-lg hover:shadow-blue-500/25"
+          className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-blue-500 to-violet-500 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:from-blue-400 hover:to-violet-400 hover:shadow-lg hover:shadow-blue-500/25 hover:scale-105"
         >
           Get in Touch
-          <ArrowRight className="h-4 w-4" />
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
         </a>
         <a
           href="#projects"
-          className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-zinc-300 transition-all hover:border-white/25 hover:text-white"
+          className="inline-flex items-center gap-2 rounded-xl border border-white/10 px-5 py-2.5 text-sm font-medium text-zinc-300 transition-all duration-300 hover:border-white/25 hover:text-white hover:scale-105"
         >
           View Projects
         </a>
