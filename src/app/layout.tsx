@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import Particles from "@/components/Particles";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -35,7 +36,10 @@ export default function RootLayout({
       lang="id"
       className={`${plusJakarta.variable} ${jetbrainsMono.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <Particles />
+        {children}
+      </body>
     </html>
   );
 }
